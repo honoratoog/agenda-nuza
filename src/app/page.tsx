@@ -1,80 +1,111 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#f8f6f0] flex items-center justify-center px-6 py-12">
-      <div className="w-full max-w-6xl rounded-[40px] bg-white shadow-[0_40px_120px_rgba(0,0,0,0.12)] overflow-hidden grid lg:grid-cols-2">
-        
-        {/* LADO ESQUERDO ESTÉTICO */}
-        <div className="bg-gradient-to-br from-[#b7e4c7] via-[#95d5b2] to-[#74c69d] p-12 lg:p-16 flex flex-col justify-center relative">
-
-          <div className="absolute top-8 left-8 w-24 h-24 bg-white/20 rounded-full blur-2xl"></div>
-          <div className="absolute bottom-8 right-8 w-40 h-40 bg-white/20 rounded-full blur-3xl"></div>
-
-          <span className="w-fit rounded-full bg-white px-5 py-2 text-sm font-semibold text-[#40916c]">
+    <main className="min-h-screen flex items-center justify-center bg-[#f5f2eb] p-6">
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="w-full max-w-6xl overflow-hidden rounded-3xl bg-white shadow-2xl grid md:grid-cols-2"
+      >
+        <div className="bg-gradient-to-br from-[#9ed3b0] to-[#6fb48f] p-12 flex flex-col justify-center">
+          <motion.span
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="mb-6 w-fit rounded-full bg-white/80 px-4 py-1 text-sm font-medium text-[#3f7f5f]"
+          >
             Danuza Andrietti Studio
-          </span>
+          </motion.span>
 
-          <h1 className="mt-8 text-6xl font-bold text-white leading-tight">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mb-6 text-6xl font-bold text-white"
+          >
             AgendaNuza
-          </h1>
+          </motion.h1>
 
-          <p className="mt-6 text-white/90 text-lg max-w-md">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.6 }}
+            className="max-w-md text-lg text-white/90"
+          >
             Sua beleza merece organização, conforto e tecnologia.
             Agende seus horários com facilidade e tenha uma experiência exclusiva.
-          </p>
+          </motion.p>
 
-          <div className="mt-10 flex gap-4">
-            <div className="bg-white/20 px-2 py-3 rounded-xl backdrop-blur-md">
-              <p className="text-white font-semibold">Segurança &</p>
-              <span className="text-white/80 text-sm">qualidade</span>
-            </div>
-
-            <div className="bg-white/20 px-2 py-2 rounded-xl backdrop-blur-md">
-              <p className="text-white font-semibold">Desde 1996</p>
-              <span className="text-white/80 text-sm">com você</span>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="mt-12 flex items-center gap-4"
+          >
+            <div className="h-[2px] w-16 bg-[#d4af37]" />
+            <h2 className="text-4xl font-bold tracking-wide text-white">
+              Desde 1996
+            </h2>
+          </motion.div>
         </div>
 
-        {/* LADO DIREITO LOGIN / CTA */}
-        <div className="p-12 lg:p-16 flex flex-col justify-center">
-          <h2 className="text-4xl font-bold text-[#1f1f1f]">
-            Bem-vinda
-          </h2>
+        <div className="p-12 flex flex-col justify-center">
+          <motion.h2
+            initial={{ opacity: 0, x: 25 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mb-4 text-4xl font-bold text-gray-800"
+          >
+            Bem-vindo(a)
+          </motion.h2>
 
-          <p className="mt-3 text-[#666] text-lg">
+          <motion.p
+            initial={{ opacity: 0, x: 25 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.45, duration: 0.6 }}
+            className="mb-8 text-gray-600"
+          >
             Entre ou crie sua conta para agendar seu atendimento.
-          </p>
+          </motion.p>
 
-          <div className="mt-10 flex flex-col gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="flex flex-col gap-4"
+          >
             <Link
               href="/login"
-              className="rounded-2xl bg-[#40916c] px-6 py-4 text-center text-white font-semibold text-lg hover:opacity-90 transition"
+              className="rounded-xl bg-[#3f7f5f] py-4 text-center font-semibold text-white transition hover:scale-[1.01] hover:opacity-90"
             >
               Entrar na minha conta
             </Link>
 
             <Link
               href="/cadastro"
-              className="rounded-2xl border-2 border-[#d4af37] px-6 py-4 text-center text-[#1f1f1f] font-semibold text-lg hover:bg-[#fff6dc] transition"
+              className="rounded-xl border border-[#d4af37] py-4 text-center font-semibold text-gray-800 transition hover:scale-[1.01] hover:bg-[#faf6ea]"
             >
               Criar nova conta
             </Link>
 
             <Link
               href="/admin"
-              className="mt-6 text-center text-sm text-[#888] hover:text-[#1f1f1f] transition"
+              className="text-center text-sm text-gray-500 transition hover:text-gray-800"
             >
               Área administrativa
             </Link>
-          </div>
 
-          <div className="mt-12 text-center text-xs text-[#aaa]">
-            AgendaNuza © 2026
-          </div>
+            <span className="mt-6 text-center text-xs text-gray-400">
+              AgendaNuza © 2026
+            </span>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </main>
   );
 }
