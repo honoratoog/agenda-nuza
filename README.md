@@ -74,3 +74,7 @@ Essa estrutura facilita manutenção, evolução e integração futura com aplic
 1. **Clone o repositório:**
    ```bash
    git clone [https://github.com/seu-usuario/AgendaNuza.git](https://github.com/seu-usuario/AgendaNuza.git)
+
+## 6. Prints das telas atuais
+   <img width="1410" height="694" alt="image" src="https://github.com/user-attachments/assets/e99a2dac-11bd-41ac-b5bb-de9c0460f839" />
+
