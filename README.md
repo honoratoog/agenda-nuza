@@ -77,4 +77,10 @@ Essa estrutura facilita manutenção, evolução e integração futura com aplic
 
 ## 6. Prints das telas atuais
    <img width="1410" height="694" alt="image" src="https://github.com/user-attachments/assets/e99a2dac-11bd-41ac-b5bb-de9c0460f839" />
+   <img width="1326" height="772" alt="image" src="https://github.com/user-attachments/assets/6239389b-caee-4c07-8338-c1efcd75312e" />
+   <img width="1196" height="869" alt="image" src="https://github.com/user-attachments/assets/7a62f79e-770a-4c9c-8101-91d509cd71e3" />
+   <img width="1920" height="924" alt="image" src="https://github.com/user-attachments/assets/f36eb47f-3f75-4f96-9080-162de18955fd" />
+
+
+
 
