@@ -60,11 +60,11 @@ export default function AdminLayout({
             </p>
 
             <Link
-  href="/"
-  className="mt-4 inline-block rounded-xl bg-[#1f1f1f] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
->
-  Voltar para home
-</Link>
+              href="/"
+              className="mt-4 inline-block rounded-xl bg-[#1f1f1f] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+            >
+              Voltar para home
+            </Link>
           </div>
         </aside>
 

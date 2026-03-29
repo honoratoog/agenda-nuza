@@ -12,57 +12,66 @@ enum TipoUsuario {
 }
 
 enum StatusAgendamento {
-  AGENDADO
+  PENDENTE
+  CONFIRMADO
   FINALIZADO
   CANCELADO
 }
 
-model Usuario {
-  id             Int             @id @default(autoincrement())
-  nome           String
-  email          String          @unique
-  senha          String
-  telefone       String
-  tipo           TipoUsuario     @default(CLIENTE)
-  ativo          Boolean         @default(true)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+enum CategoriaServico {
+  UNHAS
+  DEPILACAO
+  CABELO
+  COMBINACOES
+}
 
-  agendamentos   Agendamento[]
+model Usuario {
+  id            Int            @id @default(autoincrement())
+  nome          String
+  email         String         @unique
+  senha         String
+  telefone      String
+  tipo          TipoUsuario    @default(CLIENTE)
+  ativo         Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  agendamentos  Agendamento[]
 
   @@map("usuarios")
 }
 
 model Servico {
-  id             Int             @id @default(autoincrement())
-  nome           String
-  descricao      String?
-  preco          Decimal         @db.Decimal(10,2)
-  duracaoMin     Int
-  ativo          Boolean         @default(true)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  id            Int               @id @default(autoincrement())
+  nome          String
+  descricao     String?
+  preco         Decimal           @db.Decimal(10,2)
+  duracaoMin    Int
+  categoria     CategoriaServico
+  ativo         Boolean           @default(true)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
 
-  agendamentos   Agendamento[]
+  agendamentos  Agendamento[]
 
   @@map("servicos")
 }
 
 model Agendamento {
-  id             Int                 @id @default(autoincrement())
-  data           DateTime
-  horaInicio     DateTime
-  horaFim        DateTime
-  status         StatusAgendamento   @default(AGENDADO)
-  observacao     String?
-  createdAt      DateTime            @default(now())
-  updatedAt      DateTime            @updatedAt
+  id            Int                 @id @default(autoincrement())
+  data          DateTime
+  horaInicio    DateTime
+  horaFim       DateTime
+  status        StatusAgendamento   @default(PENDENTE)
+  observacao    String?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
 
-  usuarioId      Int
-  servicoId      Int
+  usuarioId     Int
+  servicoId     Int
 
-  usuario        Usuario             @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-  servico        Servico             @relation(fields: [servicoId], references: [id], onDelete: Restrict)
+  usuario       Usuario             @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  servico       Servico             @relation(fields: [servicoId], references: [id], onDelete: Restrict)
 
   @@index([usuarioId])
   @@index([servicoId])
