@@ -1,0 +1,17 @@
+@startuml C4_Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title Sistema de Agendamento para Salão - Diagrama de Contexto
+
+Person(cliente, "Cliente", "Realiza cadastro, login, visualiza serviços e agenda atendimentos.")
+Person(admin, "Administradora", "Gerencia agendamentos, cadastra clientes manualmente e finaliza atendimentos.")
+
+System(sistema, "Sistema de Agendamento do Salão", "Sistema web responsável pelo gerenciamento de clientes, serviços e agendamentos.")
+
+SystemDb(banco, "Banco de Dados", "Armazena clientes, administradores, serviços e agendamentos.")
+
+Rel(cliente, sistema, "Usa para se cadastrar, fazer login, visualizar serviços e agendar", "HTTPS")
+Rel(admin, sistema, "Usa para gerenciar atendimentos e clientes", "HTTPS")
+Rel(sistema, banco, "Lê e grava dados", "SQL")
+
+@enduml

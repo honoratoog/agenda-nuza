@@ -1,0 +1,24 @@
+@startuml C4_Container
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Sistema de Agendamento para Salão - Diagrama de Containers
+
+Person(cliente, "Cliente", "Realiza cadastro, login e agendamento.")
+Person(admin, "Administradora", "Gerencia clientes e atendimentos.")
+
+System_Boundary(s1, "Sistema de Agendamento do Salão") {
+
+    Container(frontend, "FrontendWeb", "HTML, CSS, JavaScript / React ou Next.js", "Interface responsiva para clientes e administradora.")
+    
+    Container(backend, "Backend / API", "Java Spring Boot ou Node.js", "Responsável pelas regras de negócio, autenticação, serviços e agendamentos.")
+    
+    ContainerDb(database, "Banco de Dados", "MySQL ou PostgreSQL", "Armazena clientes, usuários, serviços, horários e atendimentos.")
+}
+
+Rel(cliente, frontend, "Acessa pelo navegador", "HTTPS")
+Rel(admin, frontend, "Acessa painel administrativo", "HTTPS")
+
+Rel(frontend, backend, "Consome API", "JSON/HTTPS")
+Rel(backend, database, "Lê e grava dados", "SQL")
+
+@enduml
