@@ -67,6 +67,10 @@ O sistema segue uma arquitetura simples em camadas:
 
 Essa estrutura facilita manutenção, evolução e integração futura com aplicativos mobile.
 
+<img width="501" height="714" alt="image" src="https://github.com/user-attachments/assets/d69da58b-7870-402f-92ec-e42156e67120" />
+<img width="463" height="1143" alt="image" src="https://github.com/user-attachments/assets/687180d4-dc14-403e-aa57-c440cbdec3a0" />
+
+
 ---
 
 ## 5. Como Executar o Projeto
