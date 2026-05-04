@@ -70,8 +70,7 @@ A cada push ou pull request nas branches `main` ou `master`, o pipeline executa:
 
 Arquivo do pipeline:
 
-```bash
-.github/workflows/ci.yml
+`.github/workflows/ci.yml`
 
 ## 4. Arquitetura do Sistema
 
