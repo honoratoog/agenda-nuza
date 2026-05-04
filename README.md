@@ -58,6 +58,20 @@ O AgendaNuza centraliza essas informações em um sistema digital moderno, propo
 | **Prisma ORM** | Integração com banco | Facilita modelagem e consultas |
 
 ---
+## CI/CD
+
+O projeto possui pipeline de Integração Contínua configurada com GitHub Actions.
+
+A cada push ou pull request nas branches `main` ou `master`, o pipeline executa:
+
+- instalação das dependências
+- geração do Prisma Client
+- build da aplicação
+
+Arquivo do pipeline:
+
+```bash
+.github/workflows/ci.yml
 
 ## 4. Arquitetura do Sistema
 
