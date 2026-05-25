@@ -49,6 +49,12 @@ export default function AdminLayout({
               <Link href="/admin/servicos" className={linkClass("/admin/servicos")}>
                 Serviços
               </Link>
+              <Link
+  href="/login"
+  className="rounded-2xl px-4 py-3 font-medium text-red-600 transition hover:bg-red-50"
+>
+  Sair
+</Link>
             </nav>
           </div>
 

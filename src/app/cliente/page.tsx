@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-export default function Cliente() {
+export default function Cliente() {  
   const horarios = ["09:00", "09:30", "10:00", "11:00", "14:00", "15:30"];
 
   const categorias = [
