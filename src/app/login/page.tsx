@@ -105,8 +105,8 @@ export default function Login() {
             className="mt-10 grid grid-cols-2 gap-4"
           >
             <div className="bg-white/20 px-4 py-4 rounded-2xl backdrop-blur-md">
-              <p className="text-white font-semibold">Login real</p>
-              <span className="text-white/80 text-sm">validado no banco</span>
+              <p className="text-white font-semibold">Agendamento</p>
+              <span className="text-white/80 text-sm">rápido e simples</span>
             </div>
 
             <div className="bg-white/20 px-4 py-4 rounded-2xl backdrop-blur-md">

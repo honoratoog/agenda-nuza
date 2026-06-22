@@ -121,8 +121,8 @@ export default function Cadastro() {
             className="mt-10 grid grid-cols-2 gap-4"
           >
             <div className="bg-white/20 px-4 py-4 rounded-2xl backdrop-blur-md">
-              <p className="text-white font-semibold">Cadastro real</p>
-              <span className="text-white/80 text-sm">salvo no banco</span>
+              <p className="text-white font-semibold">Cadastro rápido</p>
+              <span className="text-white/80 text-sm">em poucos passos</span>
             </div>
 
             <div className="bg-white/20 px-4 py-4 rounded-2xl backdrop-blur-md">
