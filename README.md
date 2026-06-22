@@ -1,105 +1,292 @@
 # 🌿 AgendaNuza - Sistema de Gestão Inteligente
 
-> Modernizando o controle de atendimentos do **Danuza Andrietti Studio** com uma solução digital intuitiva e escalável.
+> Modernizando o controle de atendimentos do **Danuza Andrietti Studio** com uma solução digital intuitiva, organizada e escalável.
 
 ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=prisma&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
+![Status](https://img.shields.io/badge/Status-MVP%20Conclu%C3%ADdo-success?style=for-the-badge)
 
-O **AgendaNuza** é uma plataforma web desenvolvida para o *Danuza Andrietti Studio*, com o objetivo de modernizar o controle de atendimentos, clientes e serviços, substituindo agendas físicas por uma solução digital organizada, intuitiva e escalável.
+🚀 Status do Projeto
 
-O sistema permite que clientes realizem seus próprios agendamentos e que a administradora tenha controle total da agenda, serviços e atendimentos.
+MVP Concluído e Funcional
 
----
+O sistema já possui autenticação, cadastro de clientes, agendamentos, painel administrativo, controle de serviços, finalização de atendimentos e persistência de dados utilizando Prisma ORM.
 
-## 1. Domínio do Problema
+⸻
 
-Pequenos salões de beleza frequentemente enfrentam dificuldades no controle manual de horários, o que pode causar:
+📖 Sobre o Projeto
 
-* ❌ Conflitos de agendamento
-* ❌ Esquecimento de atendimentos
-* ❌ Falta de organização financeira
-* ❌ Dificuldade em acompanhar clientes atendidos
+O AgendaNuza é uma plataforma web desenvolvida para o Danuza Andrietti Studio, com o objetivo de modernizar o gerenciamento de atendimentos, clientes e serviços.
 
-O AgendaNuza centraliza essas informações em um sistema digital moderno, proporcionando melhor organização e experiência tanto para o cliente quanto para o profissional.
+A solução substitui o controle manual por uma aplicação web moderna, permitindo que clientes realizem seus próprios agendamentos enquanto a administradora mantém controle total sobre a operação do salão.
 
----
+⸻
 
-## 2. Requisitos do Sistema
+🎯 Domínio do Problema
 
-### 📋 Requisitos Funcionais (RF)
-* **RF01:** Cadastro de clientes com nome, email, senha e telefone.
-* **RF02:** Login de clientes para acesso ao sistema.
-* **RF03:** Visualização dos serviços disponíveis.
-* **RF04:** Agendamento de serviços com seleção de data e horário.
-* **RF05:** Painel administrativo para visualização dos atendimentos agendados.
-* **RF06:** Cadastro manual de clientes pela administradora (caso o agendamento seja presencial).
-* **RF07:** Marcação de atendimento como finalizado pela administradora.
+Pequenos salões de beleza frequentemente enfrentam dificuldades relacionadas ao gerenciamento manual da agenda, causando problemas como:
 
-### ⚙️ Requisitos Não Funcionais (RNF)
-* **RNF01:** Interface responsiva para uso em celulares, tablets e desktops.
-* **RNF02:** Interface moderna com identidade visual do salão (verde claro, branco e dourado).
-* **RNF03:** Tempo de resposta rápido para carregamento de agenda e serviços.
-* **RNF04:** Estrutura preparada para escalabilidade futura (ex: múltiplos profissionais).
+* ❌ Conflitos de horários
+* ❌ Falta de controle dos atendimentos
+* ❌ Dificuldade para acompanhar clientes
+* ❌ Falta de organização operacional
+* ❌ Controle manual de serviços realizados
 
----
+O AgendaNuza centraliza todas essas informações em um único ambiente digital.
 
-## 3. Tecnologias Utilizadas
+⸻
 
-| Tecnologia | Papel no Sistema | Justificativa |
-| :--- | :--- | :--- |
-| **Next.js** | Frontend e Backend (Fullstack) | Permite criar interfaces modernas e API no mesmo projeto |
-| **React** | Interface | Componentização e interatividade |
-| **Tailwind CSS** | Estilização | Desenvolvimento rápido com design moderno |
-| **Node.js** | Ambiente de execução | Base para o Next.js |
-| **MySQL** | Banco de dados | Simplicidade e confiabilidade para sistemas de gestão |
-| **Prisma ORM** | Integração com banco | Facilita modelagem e consultas |
+📋 Requisitos Funcionais
 
----
-## CI/CD
+RF01
+Cadastro de clientes com nome, e-mail, telefone e senha.
 
-O projeto possui pipeline de Integração Contínua configurada com GitHub Actions.
+RF02
+Login de clientes e administradores.
 
-A cada push ou pull request nas branches `main` ou `master`, o pipeline executa:
+RF03
+Visualização dos serviços disponíveis.
 
-- instalação das dependências
-- geração do Prisma Client
-- build da aplicação
+RF04
+Agendamento de serviços com escolha de data e horário.
 
-Arquivo do pipeline:
+RF05
+Visualização dos horários ocupados.
 
-`.github/workflows/ci.yml`
+RF06
+Dashboard administrativo para acompanhamento da agenda.
 
-## 4. Arquitetura do Sistema
+RF07
+Cadastro manual de clientes pela administradora.
 
-O sistema segue uma arquitetura simples em camadas:
+RF08
+Visualização do histórico de agendamentos.
 
-`Cliente` → `Interface Web` → `API do Next.js` → `Prisma` → `MySQL`
+RF09
+Cancelamento de agendamentos pelo cliente.
 
-Essa estrutura facilita manutenção, evolução e integração futura com aplicativos mobile.
+RF10
+Finalização de atendimentos pela administradora.
 
-<img width="501" height="714" alt="image" src="https://github.com/user-attachments/assets/d69da58b-7870-402f-92ec-e42156e67120" />
-<img width="463" height="1143" alt="image" src="https://github.com/user-attachments/assets/687180d4-dc14-403e-aa57-c440cbdec3a0" />
+RF11
+Controle de status dos atendimentos.
+
+RF12
+Gestão dos serviços cadastrados.
+
+RF13
+Dashboard do cliente com acompanhamento dos atendimentos.
+
+RF14
+Dashboard administrativo com indicadores do salão.
+
+⸻
+
+⚙️ Requisitos Não Funcionais
+
+RNF01
+Interface responsiva para dispositivos móveis e desktop.
+
+RNF02
+Interface moderna alinhada à identidade visual do salão.
+
+RNF03
+Baixo tempo de resposta para carregamento de informações.
+
+RNF04
+Arquitetura preparada para expansão futura.
+
+RNF05
+Persistência de dados utilizando ORM.
+
+RNF06
+Integração contínua através do GitHub Actions.
+
+⸻
+
+🛠️ Tecnologias Utilizadas
+
+Tecnologia	Papel no Sistema
+Next.js	Frontend e Backend
+React	Interface do usuário
+Tailwind CSS	Estilização
+Node.js	Ambiente de execução
+SQLite	Banco de dados
+Prisma ORM	Persistência e consultas
+GitHub Actions	Integração Contínua
+
+⸻
+
+🔄 CI/CD
+
+O projeto possui pipeline de Integração Contínua configurado com GitHub Actions.
+
+A cada push ou pull request, o pipeline executa automaticamente:
+
+* Instalação das dependências
+* Geração do Prisma Client
+* Build da aplicação
+* Validação da estrutura do projeto
+
+Arquivo responsável:
+
+.github/workflows/ci.yml
+
+⸻
+
+🏗️ Arquitetura
+
+O sistema utiliza uma arquitetura Full Stack baseada em Next.js.
+
+Cliente/Admin
+      ↓
+   Next.js
+      ↓
+ API Routes
+      ↓
+ Prisma ORM
+      ↓
+   SQLite
+
+Essa estrutura facilita manutenção, escalabilidade e futuras integrações.
+
+⸻
+
+🗄️ Modelagem de Dados
+
+Entidades Principais
+
+Usuário
+
+* Cliente
+* Administrador
+
+Serviço
+
+* Nome
+* Preço
+* Categoria
+* Duração
+
+Agendamento
+
+* Data
+* Horário
+* Status
+* Cliente
+* Serviço
+
+Status dos Agendamentos
+
+* PENDENTE
+* CONFIRMADO
+* FINALIZADO
+* CANCELADO
+
+⸻
+
+✨ Funcionalidades Implementadas
+
+Área do Cliente
+
+* Cadastro
+* Login
+* Dashboard do cliente
+* Visualização de serviços
+* Agendamento de horários
+* Consulta de horários disponíveis
+* Histórico de atendimentos
+* Cancelamento de agendamentos
+* Perfil do cliente
+
+Área Administrativa
+
+* Dashboard administrativo
+* Agenda geral do salão
+* Cadastro manual de clientes
+* Listagem de clientes
+* Gestão de serviços
+* Controle dos atendimentos
+* Finalização de agendamentos
+* Indicadores operacionais
+
+⸻
+
+▶️ Como Executar o Projeto
+
+1. Clonar o repositório
+git clone https://github.com/honoratoog/agenda-nuza.git
+
+2. Acessar a pasta
+cd agenda-nuza
+
+3. Instalar dependências
+npm install
+
+4. Gerar o Prisma Client
+npx prisma generate
+
+5. Criar o banco
+npx prisma db push
+
+6. Popular dados iniciais
+npx prisma db seed
+
+7. Executar a aplicação
+npm run dev
+
+8. Abrir no navegador
+http://localhost:3000
+
+⸻
+
+📸 Telas do Sistema
+
+Área Pública
+
+* Login
+<img width="1440" height="719" alt="Captura de Tela 2026-06-22 às 09 13 45" src="https://github.com/user-attachments/assets/285b6e6b-1367-49c1-887e-48693d943f63" />
+
+* Cadastro
+<img width="1440" height="719" alt="Captura de Tela 2026-06-22 às 09 13 20" src="https://github.com/user-attachments/assets/ddbe30d9-d115-4564-adf7-55b6e9caf838" />
+
+Área do Cliente
+
+*Início
+<img width="1440" height="714" alt="Captura de Tela 2026-06-22 às 09 15 38" src="https://github.com/user-attachments/assets/ba9b95a8-ac7f-4b02-b087-b969e83649c2" />
+
+* Dashboard
+<img width="1440" height="713" alt="Captura de Tela 2026-06-22 às 09 18 13" src="https://github.com/user-attachments/assets/553ea3a8-0d27-43f2-bcef-2dbcd710b4b4" />
+
+* Serviços
+<img width="1440" height="716" alt="Captura de Tela 2026-06-22 às 09 18 35" src="https://github.com/user-attachments/assets/1993abc2-fb71-4cda-baad-92ad1cf2a83f" />
+
+Área Administrativa
+<img width="1440" height="718" alt="Captura de Tela 2026-06-22 às 09 19 34" src="https://github.com/user-attachments/assets/c6b1c65a-93c5-42d2-b4b7-ef72f21ade50" />
+
+* Agenda
+<img width="1440" height="715" alt="Captura de Tela 2026-06-22 às 09 21 34" src="https://github.com/user-attachments/assets/c7081278-8787-4609-bb32-37d64bd037bd" />
+
+* Clientes
+<img width="1440" height="715" alt="Captura de Tela 2026-06-22 às 09 23 10" src="https://github.com/user-attachments/assets/e172f436-0507-4044-bb5f-73efd267bd54" />
 
 
----
+* Serviços
+<img width="1440" height="715" alt="Captura de Tela 2026-06-22 às 09 22 24" src="https://github.com/user-attachments/assets/3ec4df48-6ab1-4a97-bdde-b11478c49d9b" />
 
-## 5. Como Executar o Projeto
+⸻
 
-1. **Clone o repositório:**
-   ```bash
-   git clone [https://github.com/seu-usuario/AgendaNuza.git](https://github.com/seu-usuario/AgendaNuza.git)
+Lucas Honorato dos Santos
 
-## 6. Prints das telas atuais
-   <img width="1410" height="694" alt="image" src="https://github.com/user-attachments/assets/e99a2dac-11bd-41ac-b5bb-de9c0460f839" />
-   <img width="1326" height="772" alt="image" src="https://github.com/user-attachments/assets/6239389b-caee-4c07-8338-c1efcd75312e" />
-   <img width="1196" height="869" alt="image" src="https://github.com/user-attachments/assets/7a62f79e-770a-4c9c-8101-91d509cd71e3" />
-   <img width="1920" height="924" alt="image" src="https://github.com/user-attachments/assets/f36eb47f-3f75-4f96-9080-162de18955fd" />
-   <img width="1897" height="921" alt="image" src="https://github.com/user-attachments/assets/6624181f-a023-498e-98dd-591d90222a8c" />
+Projeto desenvolvido para a disciplina de Programação Web, com foco em desenvolvimento Full Stack utilizando tecnologias modernas do ecossistema JavaScript.
 
+⸻
 
+📌 Repositório
 
-
-
+https://github.com/honoratoog/agenda-nuza
