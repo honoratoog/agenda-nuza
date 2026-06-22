@@ -1,7 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+type Usuario = {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+  tipo: string;
+};
 
 export default function ClienteLayout({
   children,
@@ -9,6 +18,17 @@ export default function ClienteLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const [usuario, setUsuario] = useState<Usuario | null>(null);
+
+  useEffect(() => {
+    const usuarioStorage = localStorage.getItem("usuario");
+
+    if (usuarioStorage) {
+      setUsuario(JSON.parse(usuarioStorage));
+    }
+  }, []);
 
   function linkClass(href: string) {
     const ativo = pathname === href;
@@ -18,13 +38,23 @@ export default function ClienteLayout({
       : "rounded-2xl px-4 py-3 font-medium text-[#1f1f1f] transition hover:bg-[#f3efe6]";
   }
 
+  function sair() {
+    localStorage.removeItem("usuario");
+    router.push("/login");
+  }
+
+  const nome = usuario?.nome || "Cliente";
+  const inicial = nome.charAt(0).toUpperCase();
+
   return (
     <main className="min-h-screen bg-[#f8f6f0]">
       <div className="flex min-h-screen">
         <aside className="hidden w-72 flex-col justify-between bg-white px-6 py-8 shadow-[0_10px_40px_rgba(0,0,0,0.06)] lg:flex">
           <div>
             <div>
-              <p className="text-sm font-medium text-[#40916c]">Área do cliente</p>
+              <p className="text-sm font-medium text-[#40916c]">
+                Área do cliente
+              </p>
               <h1 className="mt-1 text-3xl font-bold text-[#1f1f1f]">
                 AgendaNuza
               </h1>
@@ -58,12 +88,13 @@ export default function ClienteLayout({
               >
                 Meu perfil
               </Link>
-              <Link
-  href="/login"
-  className="rounded-2xl px-4 py-3 font-medium text-red-600 transition hover:bg-red-50"
->
-  Sair
-</Link>
+
+              <button
+                onClick={sair}
+                className="rounded-2xl px-4 py-3 text-left font-medium text-red-600 transition hover:bg-red-50"
+              >
+                Sair
+              </button>
             </nav>
           </div>
 
@@ -75,10 +106,10 @@ export default function ClienteLayout({
             </p>
 
             <Link
-              href="/"
-              className="mt-4 inline-block rounded-xl bg-[#1f1f1f] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+              href="/cliente"
+              className="mt-4 inline-block rounded-xl bg-white px-4 py-2 text-sm font-semibold text-[#1f1f1f] transition hover:bg-[#f2f2f2]"
             >
-              Voltar para home
+              Agendar agora
             </Link>
           </div>
         </aside>
@@ -94,10 +125,10 @@ export default function ClienteLayout({
 
             <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#b7e4c7] text-lg font-bold text-[#1f1f1f]">
-                L
+                {inicial}
               </div>
               <div>
-                <p className="font-semibold text-[#1f1f1f]">Luiza Honorato</p>
+                <p className="font-semibold text-[#1f1f1f]">{nome}</p>
                 <p className="text-sm text-[#777]">Cliente</p>
               </div>
             </div>

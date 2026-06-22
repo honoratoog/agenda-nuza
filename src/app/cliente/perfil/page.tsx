@@ -1,23 +1,148 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type Usuario = {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+  tipo: string;
+  ativo?: boolean;
+  createdAt?: string;
+};
 
 export default function PerfilPage() {
-  const [salvo, setSalvo] = useState(false);
+  const [usuario, setUsuario] = useState<Usuario | null>(null);
 
-  function salvarAlteracoes() {
-    setSalvo(true);
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
 
-    setTimeout(() => {
-      setSalvo(false);
-    }, 3000);
+  const [carregando, setCarregando] = useState(true);
+  const [salvando, setSalvando] = useState(false);
+  const [erro, setErro] = useState("");
+  const [sucesso, setSucesso] = useState("");
+
+  useEffect(() => {
+    const usuarioStorage = localStorage.getItem("usuario");
+
+    if (!usuarioStorage) {
+      setErro("Usuário não encontrado. Faça login novamente.");
+      setCarregando(false);
+      return;
+    }
+
+    const usuarioLogado = JSON.parse(usuarioStorage) as Usuario;
+
+    async function buscarUsuario() {
+      try {
+        const response = await fetch(`/api/usuarios/${usuarioLogado.id}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          setErro(data.message || "Erro ao carregar perfil.");
+          return;
+        }
+
+        setUsuario(data);
+        setNome(data.nome);
+        setEmail(data.email);
+        setTelefone(data.telefone);
+      } catch {
+        setErro("Não foi possível carregar os dados do perfil.");
+      } finally {
+        setCarregando(false);
+      }
+    }
+
+    buscarUsuario();
+  }, []);
+
+  async function salvarAlteracoes() {
+    setErro("");
+    setSucesso("");
+
+    if (!usuario) {
+      setErro("Usuário não encontrado.");
+      return;
+    }
+
+    if (!nome || !email || !telefone) {
+      setErro("Nome, email e WhatsApp são obrigatórios.");
+      return;
+    }
+
+    if (senha && senha.length < 6) {
+      setErro("A nova senha deve ter pelo menos 6 caracteres.");
+      return;
+    }
+
+    if (senha !== confirmarSenha) {
+      setErro("As senhas não conferem.");
+      return;
+    }
+
+    try {
+      setSalvando(true);
+
+      const response = await fetch(`/api/usuarios/${usuario.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome,
+          email,
+          telefone,
+          senha: senha || undefined,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErro(data.message || "Erro ao atualizar perfil.");
+        return;
+      }
+
+      localStorage.setItem("usuario", JSON.stringify(data.usuario));
+      setUsuario(data.usuario);
+      setSenha("");
+      setConfirmarSenha("");
+      setSucesso("Informações atualizadas com sucesso.");
+
+      setTimeout(() => {
+        setSucesso("");
+      }, 3000);
+    } catch {
+      setErro("Não foi possível atualizar o perfil.");
+    } finally {
+      setSalvando(false);
+    }
+  }
+
+  if (carregando) {
+    return (
+      <div className="rounded-[32px] bg-white p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
+        <p className="text-[#666]">Carregando perfil...</p>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
-      {salvo && (
+      {erro && (
+        <div className="rounded-2xl bg-red-50 px-5 py-4 font-semibold text-red-600">
+          {erro}
+        </div>
+      )}
+
+      {sucesso && (
         <div className="rounded-2xl bg-[#b7e4c7] px-5 py-4 font-semibold text-[#1f1f1f]">
-          Informações atualizadas com sucesso.
+          {sucesso}
         </div>
       )}
 
@@ -33,24 +158,26 @@ export default function PerfilPage() {
         <section className="rounded-[32px] bg-white p-8 shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
           <div className="flex flex-col items-center text-center">
             <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[#b7e4c7] text-3xl font-bold text-[#1f1f1f]">
-              L
+              {nome ? nome.charAt(0).toUpperCase() : "U"}
             </div>
 
             <h2 className="mt-5 text-2xl font-bold text-[#1f1f1f]">
-              Luiza Honorato
+              {nome || "Cliente"}
             </h2>
 
             <p className="mt-1 text-sm text-[#666]">Cliente AgendaNuza</p>
 
             <div className="mt-6 w-full rounded-[24px] bg-[#f8f6f0] p-4 text-left">
               <p className="text-sm text-[#666]">Status da conta</p>
-              <p className="mt-1 font-semibold text-[#1f1f1f]">Ativa</p>
+              <p className="mt-1 font-semibold text-[#1f1f1f]">
+                {usuario?.ativo === false ? "Inativa" : "Ativa"}
+              </p>
             </div>
 
             <div className="mt-4 w-full rounded-[24px] bg-[#f8f6f0] p-4 text-left">
-              <p className="text-sm text-[#666]">Membro desde</p>
+              <p className="text-sm text-[#666]">Tipo de usuário</p>
               <p className="mt-1 font-semibold text-[#1f1f1f]">
-                Março de 2026
+                {usuario?.tipo}
               </p>
             </div>
           </div>
@@ -67,7 +194,8 @@ export default function PerfilPage() {
                 Nome completo
               </label>
               <input
-                defaultValue="Luiza Honorato"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
                 className="w-full rounded-2xl border border-[#d9d9d9] bg-white px-4 py-3 outline-none focus:border-[#40916c]"
               />
             </div>
@@ -77,7 +205,8 @@ export default function PerfilPage() {
                 WhatsApp
               </label>
               <input
-                defaultValue="(47) 99999-9999"
+                value={telefone}
+                onChange={(e) => setTelefone(e.target.value)}
                 className="w-full rounded-2xl border border-[#d9d9d9] bg-white px-4 py-3 outline-none focus:border-[#40916c]"
               />
             </div>
@@ -87,7 +216,8 @@ export default function PerfilPage() {
                 Email
               </label>
               <input
-                defaultValue="luiza@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full rounded-2xl border border-[#d9d9d9] bg-white px-4 py-3 outline-none focus:border-[#40916c]"
               />
             </div>
@@ -99,6 +229,8 @@ export default function PerfilPage() {
               <input
                 type="password"
                 placeholder="Digite uma nova senha"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
                 className="w-full rounded-2xl border border-[#d9d9d9] bg-white px-4 py-3 outline-none focus:border-[#40916c]"
               />
             </div>
@@ -110,6 +242,8 @@ export default function PerfilPage() {
               <input
                 type="password"
                 placeholder="Confirme a nova senha"
+                value={confirmarSenha}
+                onChange={(e) => setConfirmarSenha(e.target.value)}
                 className="w-full rounded-2xl border border-[#d9d9d9] bg-white px-4 py-3 outline-none focus:border-[#40916c]"
               />
             </div>
@@ -118,12 +252,26 @@ export default function PerfilPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <button
               onClick={salvarAlteracoes}
-              className="rounded-2xl bg-[#40916c] px-6 py-3 font-semibold text-white transition hover:opacity-90"
+              disabled={salvando}
+              className="rounded-2xl bg-[#40916c] px-6 py-3 font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Salvar alterações
+              {salvando ? "Salvando..." : "Salvar alterações"}
             </button>
 
-            <button className="rounded-2xl border border-[#d4af37] px-6 py-3 font-semibold text-[#1f1f1f] transition hover:bg-[#fff6dc]">
+            <button
+              onClick={() => {
+                if (!usuario) return;
+
+                setNome(usuario.nome);
+                setEmail(usuario.email);
+                setTelefone(usuario.telefone);
+                setSenha("");
+                setConfirmarSenha("");
+                setErro("");
+                setSucesso("");
+              }}
+              className="rounded-2xl border border-[#d4af37] px-6 py-3 font-semibold text-[#1f1f1f] transition hover:bg-[#fff6dc]"
+            >
               Cancelar
             </button>
           </div>

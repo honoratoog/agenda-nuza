@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
 }
 
 enum TipoUsuario {
@@ -45,7 +45,7 @@ model Servico {
   id            Int               @id @default(autoincrement())
   nome          String
   descricao     String?
-  preco         Decimal           @db.Decimal(10,2)
+  preco         Decimal           
   duracaoMin    Int
   categoria     CategoriaServico
   ativo         Boolean           @default(true)
