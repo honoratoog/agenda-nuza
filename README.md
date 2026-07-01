@@ -287,6 +287,6 @@ Projeto desenvolvido para a disciplina de Programação Web, com foco em desenvo
 
 ⸻
 
-📌 Repositório
+📌 Repositório:
 
 https://github.com/honoratoog/agenda-nuza
